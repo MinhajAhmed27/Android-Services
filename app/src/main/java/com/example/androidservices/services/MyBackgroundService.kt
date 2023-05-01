@@ -24,11 +24,11 @@ class MyBackgroundService : Service() {
             }
         }
 
-        Log.e("Service", "outside...")
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
+        TODO("Not yet implemented")
     }
 
 
