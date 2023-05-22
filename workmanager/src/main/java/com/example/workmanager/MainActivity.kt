@@ -3,11 +3,9 @@ package com.example.workmanager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.media.Image
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -32,7 +30,6 @@ import com.example.workmanager.worker.WorkerKeys
 class MainActivity : ComponentActivity() {
     private val CHANNEL_ID = "Channel_ID"
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
