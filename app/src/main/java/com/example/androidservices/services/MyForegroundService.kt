@@ -1,13 +1,15 @@
 package com.example.androidservices.services
 
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.androidservices.MainActivity
 import com.example.androidservices.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -42,19 +44,15 @@ class MyForegroundService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun showNotificationAndStartService() {
-
-        val intent = Intent(this,MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent = PendingIntent.getActivity(this,0,intent,0)
-
-
         val builder = Notification.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentIntent(pendingIntent)
             .setContentTitle("Foreground App Running..")
             .setContentText("noting")
 
+        /** This is the main function (startForeground) to start the service in foreground,
+         * if you run the service without it by calling the startForegroundService(Intent) from Main then
+         * the service only run in Background, means it would be killed once app is terminated**/
+        //here you must show the notification
         startForeground(NOTIFICATION_ID,builder.build())
 
     }
