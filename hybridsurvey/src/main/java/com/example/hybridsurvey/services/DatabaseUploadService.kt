@@ -1,4 +1,4 @@
-package com.example.androidservices.services
+package com.example.hybridsurvey.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -12,10 +12,10 @@ import android.os.IBinder
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.androidservices.R
-import com.example.androidservices.Survey
-import com.example.androidservices.localDatabase.AppDatabase
-import com.example.androidservices.localDatabase.DatabaseSingleton
+import com.example.hybridsurvey.R
+import com.example.hybridsurvey.Survey
+import com.example.hybridsurvey.localDatabase.AppDatabase
+import com.example.hybridsurvey.localDatabase.DatabaseSingleton
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 

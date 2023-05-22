@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Android Services"
+rootProject.name = "androidservices"
 include ':app'
 include ':workmanager'
+include ':hybridsurvey'

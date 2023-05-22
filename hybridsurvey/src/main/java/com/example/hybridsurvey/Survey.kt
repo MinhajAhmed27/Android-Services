@@ -1,4 +1,4 @@
-package com.example.androidservices
+package com.example.hybridsurvey
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

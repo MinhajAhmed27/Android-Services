@@ -1,14 +1,11 @@
-package com.example.androidservices.broadcastReceiver
+package com.example.hybridsurvey.broadcastReceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.os.Build
 import android.util.Log
-import androidx.core.content.ContextCompat
-import com.example.androidservices.services.DatabaseUploadService
-import com.example.androidservices.services.MyForegroundService
+import com.example.hybridsurvey.services.DatabaseUploadService
 
 class NetworkStatusReceiver : BroadcastReceiver() {
 
@@ -22,8 +19,6 @@ class NetworkStatusReceiver : BroadcastReceiver() {
                 Log.d("Tag", "Internet found.")
                 //start DatabaseUploadService
 
-                /*val intent = Intent(context, MyForegroundService::class.java)
-                context?.startForegroundService(intent)*/
                 val serviceIntent = Intent(context, DatabaseUploadService::class.java)
 
                 context.startForegroundService(serviceIntent)

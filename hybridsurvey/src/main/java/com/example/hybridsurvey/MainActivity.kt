@@ -1,4 +1,4 @@
-package com.example.androidservices
+package com.example.hybridsurvey
 
 import android.Manifest
 import android.content.Intent
@@ -7,18 +7,20 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.androidservices.base.BaseActivity
-import com.example.androidservices.services.MyBackgroundService
-import com.example.androidservices.services.MyForegroundService
+import com.example.hybridsurvey.base.BaseActivity
+import com.example.hybridsurvey.broadcastReceiver.NetworkStatusReceiver
 
 
 open class MainActivity : BaseActivity() {
+    private val networkStatusReceiver = NetworkStatusReceiver()
     private val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-    val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 100
+    private val MY_STORAGE_PERMISSION = 100
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -27,21 +29,14 @@ open class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         checkPermissions()
 
-        val next = findViewById<View>(R.id.btn_next)
-        next.setOnClickListener {
-            startActivity(Intent(this, TimerServiceActivity::class.java))
-        }
+
+        registerReceiver(networkStatusReceiver, filter)
 
 
-        val intentBackground: Intent = Intent(this, MyBackgroundService::class.java)
-//        startService(intentBackground)
-
-        val intentForeground: Intent = Intent(this, MyForegroundService::class.java)
-
-//        =========================================================
-
-        if(!isServiceRunning(MyForegroundService::class.java.name)){
-//            startForegroundService(intentForeground)
+        val goToSurvey = findViewById<View>(R.id.goToSurvey)
+        goToSurvey.setOnClickListener {
+            startActivity(Intent(this, SurveyActivity::class.java))
+            Log.d("Tag", Environment.getExternalStorageDirectory().absolutePath  + "/documents/app" )
 
         }
     }
@@ -54,7 +49,7 @@ open class MainActivity : BaseActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+                MY_STORAGE_PERMISSION
             )
         } else {
             // Permission is already granted, continue with your app logic
@@ -65,7 +60,7 @@ open class MainActivity : BaseActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
+            MY_STORAGE_PERMISSION -> {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission is granted,// continue with your app logic
@@ -86,6 +81,7 @@ open class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        registerReceiver(networkStatusReceiver, filter)
     }
 
 

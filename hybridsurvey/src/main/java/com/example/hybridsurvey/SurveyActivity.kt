@@ -1,15 +1,11 @@
-package com.example.androidservices
+package com.example.hybridsurvey
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
-import androidx.room.Room
-import com.example.androidservices.localDatabase.AppDatabase
-import com.example.androidservices.localDatabase.DatabaseSingleton
-import com.example.workmanager.network.SurveyUploadApi
+import androidx.appcompat.app.AppCompatActivity
+import com.example.hybridsurvey.localDatabase.DatabaseSingleton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_survey.*
 import kotlinx.coroutines.GlobalScope

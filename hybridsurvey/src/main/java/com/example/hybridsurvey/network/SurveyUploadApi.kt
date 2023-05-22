@@ -1,11 +1,8 @@
-package com.example.workmanager.network
+package com.example.hybridsurvey.network
 
 import okhttp3.MultipartBody
-import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.create
 import retrofit2.http.*
 
 interface SurveyUploadApi {
